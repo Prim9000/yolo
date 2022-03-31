@@ -2,11 +2,7 @@ import numpy as np
 import time
 import cv2
 import os
-import imutils
-import subprocess
-from gtts import gTTS 
-from pydub import AudioSegment
-AudioSegment.converter = "C:/Users/jasonyip184/Desktop/yolo-object-detection/ffmpeg-20181202-72b047a-win64-static/bin/ffmpeg.exe"
+from gtts import gTTS
 
 # load the COCO class labels our YOLO model was trained on
 LABELS = open("yolo-coco/coco.names").read().strip().split("\n")
@@ -123,8 +119,7 @@ while True:
 				description = ', '.join(texts)
 				tts = gTTS(description, lang='en')
 				tts.save('tts.mp3')
-				tts = AudioSegment.from_mp3("tts.mp3")
-				subprocess.call(["ffplay", "-nodisp", "-autoexit", "tts.mp3"])
+				os.system('mpg123 talk.mp3')
 
 
 cap.release()
